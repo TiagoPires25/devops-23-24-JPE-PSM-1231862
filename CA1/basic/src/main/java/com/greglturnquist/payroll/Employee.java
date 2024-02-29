@@ -32,13 +32,26 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String description;
+	private int jobYears;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description) {
+	public Employee(String firstName, String lastName, String description, int jobYears) {
+		if (isNegativeYears(jobYears) || isNameOrDescriptionEmptyOrNull(firstName, lastName, description)) {
+			throw new IllegalArgumentException("Invalid employee data");
+		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
+		this.jobYears = jobYears;
+	}
+
+	public boolean isNegativeYears(int years) {
+		return years < 0;
+	}
+
+	public boolean isNameOrDescriptionEmptyOrNull(String firstName, String lastName, String description) {
+		return firstName == null || lastName == null || description == null || firstName.isEmpty() || lastName.isEmpty() || description.isEmpty();
 	}
 
 	@Override
@@ -88,6 +101,10 @@ public class Employee {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getJobYears() {
+		return jobYears;
 	}
 
 	@Override

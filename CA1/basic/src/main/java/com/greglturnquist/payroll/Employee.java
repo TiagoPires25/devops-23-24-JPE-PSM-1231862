@@ -51,7 +51,7 @@ public class Employee {
 	}
 
 	public boolean isNameOrDescriptionEmptyOrNull(String firstName, String lastName, String description) {
-		return firstName == null || lastName == null || description == null || firstName.isEmpty() || lastName.isEmpty() || description.isEmpty();
+		return firstName == null || lastName == null || description == null || firstName.trim().isEmpty() || lastName.trim().isEmpty() || description.trim().isEmpty();
 	}
 
 	@Override

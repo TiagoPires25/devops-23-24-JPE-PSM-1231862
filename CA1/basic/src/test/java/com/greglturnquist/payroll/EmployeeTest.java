@@ -199,4 +199,24 @@ class EmployeeTest {
         //assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testEmployee_EmailDoesNotContainAdressSign() {
+        //arrange
+        String firstName = "Joaquim";
+        String lastName = "Faria";
+        String description = "Consultor";
+        int jobYears = 30;
+        String email = "joaquimfaria.com";
+        String expected = "Invalid employee data";
+
+        //act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(firstName, lastName, description, jobYears, email);
+        });
+        String result = exception.getMessage();
+
+        //assert
+        assertEquals(expected, result);
+    }
 }

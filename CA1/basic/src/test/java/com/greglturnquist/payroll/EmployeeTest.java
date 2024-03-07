@@ -11,10 +11,11 @@ class EmployeeTest {
         String firstName = "Joaquim";
         String lastName = "Faria";
         String description = "Consultor";
+        String email = "joaquimfaria@gmail.com";
         int jobYears = 30;
 
         //act
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
 
         //assert
         assertNotNull(employee);
@@ -26,10 +27,12 @@ class EmployeeTest {
         String lastName = "Faria";
         String description = "Consultor";
         int jobYears = -30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -44,10 +47,12 @@ class EmployeeTest {
         String lastName = "Faria";
         String description = "Consultor";
         int jobYears = 30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -62,10 +67,12 @@ class EmployeeTest {
         String lastName = "Faria";
         String description = "Consultor";
         int jobYears = 30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -80,10 +87,12 @@ class EmployeeTest {
         String lastName = null;
         String description = "Consultor";
         int jobYears = 30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -98,10 +107,12 @@ class EmployeeTest {
         String lastName = " ";
         String description = "Consultor";
         int jobYears = 30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -115,11 +126,13 @@ class EmployeeTest {
         String firstName = "Joaquim";
         String lastName = "Faria";
         String description = null;
+        String email = "joaquimfaria@gmail.com";
         int jobYears = 30;
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -134,10 +147,12 @@ class EmployeeTest {
         String lastName = "Faria";
         String description = " ";
         int jobYears = 30;
+        String email = "joaquimfaria@gmail.com";
         String expected = "Invalid employee data";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, lastName, description, jobYears);
+            new Employee(firstName, lastName, description, jobYears, email);
         });
         String result = exception.getMessage();
 
@@ -145,5 +160,43 @@ class EmployeeTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    void testEmployee_nullEmail() {
+        //arrange
+        String firstName = "Joaquim";
+        String lastName = "Faria";
+        String description = "Consultor";
+        int jobYears = 30;
+        String email = null;
+        String expected = "Invalid employee data";
 
+        //act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(firstName, lastName, description, jobYears, email);
+        });
+        String result = exception.getMessage();
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testEmployee_emptyEmail() {
+        //arrange
+        String firstName = "Joaquim";
+        String lastName = "Faria";
+        String description = "Consultor";
+        int jobYears = 30;
+        String email = " ";
+        String expected = "Invalid employee data";
+
+        //act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(firstName, lastName, description, jobYears, email);
+        });
+        String result = exception.getMessage();
+
+        //assert
+        assertEquals(expected, result);
+    }
 }

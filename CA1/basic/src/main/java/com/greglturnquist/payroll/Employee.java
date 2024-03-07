@@ -48,16 +48,20 @@ public class Employee {
 		this.email = email;
 	}
 
-	public boolean isNegativeYears(int years) {
-		return years < 0;
-	}
-
 	public boolean validateEmployeeData(String firstName, String lastName, String description, String email) {
-		return isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(description) || isNullOrEmpty(email);
+		return isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(description) || !isValidEmail(email);
 	}
 
 	private boolean isNullOrEmpty(String str) {
 		return str == null || str.trim().isEmpty();
+	}
+
+	private boolean isValidEmail(String email) {
+		return email != null && !email.trim().isEmpty() && email.contains("@");
+	}
+
+	private boolean isNegativeYears(int jobYears) {
+		return jobYears < 0;
 	}
 
 	@Override

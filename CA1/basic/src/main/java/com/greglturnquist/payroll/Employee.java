@@ -33,25 +33,31 @@ public class Employee {
 	private String lastName;
 	private String description;
 	private int jobYears;
+	private String email;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, int jobYears) {
-		if (isNegativeYears(jobYears) || isNameOrDescriptionEmptyOrNull(firstName, lastName, description)) {
+	public Employee(String firstName, String lastName, String description, int jobYears, String email) {
+		if (isNegativeYears(jobYears) || validateEmployeeData(firstName, lastName, description,email)) {
 			throw new IllegalArgumentException("Invalid employee data");
 		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
 		this.jobYears = jobYears;
+		this.email = email;
 	}
 
 	public boolean isNegativeYears(int years) {
 		return years < 0;
 	}
 
-	public boolean isNameOrDescriptionEmptyOrNull(String firstName, String lastName, String description) {
-		return firstName == null || lastName == null || description == null || firstName.trim().isEmpty() || lastName.trim().isEmpty() || description.trim().isEmpty();
+	public boolean validateEmployeeData(String firstName, String lastName, String description, String email) {
+		return isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(description) || isNullOrEmpty(email);
+	}
+
+	private boolean isNullOrEmpty(String str) {
+		return str == null || str.trim().isEmpty();
 	}
 
 	@Override

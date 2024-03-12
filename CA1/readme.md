@@ -180,63 +180,69 @@ The objective of this section is to implement the new features and bug fixes usi
 The Version Control System is a pivotal choice for the most efficient and correct development of the project.
 Among other areas you may use the following ones for comparison: VCS support, Collaborator access, Interface and usability, Extensions and third-party integrations, Pricing plans.
 
-### BitBucket as an Alternative
-Bitbucket is a version control repository hosting service, which was created in 2008 and is owned by Atlassian. This Git repository management solution is written in Python, and built using the Django web framework.
-While you can use Bitbucket to host open source repositories, it’s primarily geared towards enterprises and businesses that are developing private, proprietary code. Another unique benefit of Bitbucket is that it offers a secure platform for your code with SOC 2 Type 2 certification.
+### Mercurial as an Alternative
+
+Mercurial and Git are both popular distributed version control systems with many similarities. 
+They each have their strengths and weaknesses, making them suitable for different scenarios. 
+Mercurial is a free and open-source distributed source control management tool, can manage projects of any size and offers a user-friendly interface. 
+A key difference between Git and Mercurial is their handling of the staging area. Git uses a separate space for changes before they're committed to the repository, while Mercurial integrates the staging area into the working directory, potentially complicating change management and increasing error chances. 
+In conclusion, Mercurial simplicity may appeal to beginners, while Git's advanced power and flexibility make it the preferred choice for most developers.
 
 ### Comparison to Git in bullet points
 
-1. **Extensions and Third-Party Integrations**: Both Bitbucket and GitHub come with a plethora of extensions and third-party integrations for you to choose from. Bitbucket has a leg up over GitHub in terms of third-party integrations. This is due to the Atlassian Marketplace, which has approximately 2,300 apps that can be used both for Bitbucket and the Atlassian sister products.
+1. **Usability**: Git is more complex, and it requires your team to know it inside and out before using it safely and effectively. With Git, one sloppy developer can cause major damage for the whole team. Its documentation is also harder to understand.
 
-2. **User Interface**: Bitbucket is considered to have an incredibly clean and organized interface. GitHub does not have an overly complex UI but it tens to be a bit more cluttered and confusing.
+2. **Security**: Security in Git vs. Mercurial depends on your level of technical expertise. Mercurial may be safer for less experienced users, but Git can offer ways to enhance safety (once you know what you are doing).
 
-3. **Branch Permissions**: One of the advantages of using Bitbucket over GitHub is that it includes this functionality for free on every plan. With GitHub, although you can enable branch restrictions for free on public repositories, you can only enforce them on private repositories with a paid plan.
+3. **Branches**: One of the main reasons developers use Git it's because of effective branching model. In Git, branches are only references to a certain commit. This makes them lightweight yet powerful.
 
 ### Summary/conclusions
-GitHub is a powerful open source platform that is well-equipped to handle personal or small team projects that you’re comfortable sharing with the public.
-Bitbucket is a cost-effective solution if you’re an enterprise or business looking for a safe hosting service for your private, proprietary code.
+- Fundamentally, Git and Mercurial are similar, and each has its merits as a VCS. They were just designed differently and require different levels of expertise.
+- Git has become an industry standard, which means more developers are familiar it. Mercurial big advantage is that it’s easy to learn and use, which is useful for less-technical content contributors.
 
-### Implementing the Assignment Goals with Bitbucket: display of the most used commands
+### Implementing the Assignment Goals with Mercurial: display of the most used commands
+#### Setting up a repository in Mercurial
+1. Install Mercurial on the local machine:
+```bash
+2. Clone the repository to your local machine:
+```bash
+cd path/to/directory
+```
+3. Initialize the repository:
+```bash
+hg init
+```
+4. Add all files to the repository:
+```bash
+hg add .
+```
+5. Commit the added files:
+```bash
+hg commit -m "Initial commit"
+```
+6. Push the commit to the remote repository:
+```bash
+hg push <repository-URL>
+```
+7. Tag the initial version of the application:
+```bash
+hg tag -m "First version of the application" v1.0
+```
 
-#### Initial Setup
-
-1. **Create BitBucket Repository**:
-   Create Bitbucket Repository: Go to the Bitbucket website and create a new repository. You can do this by logging in, navigating to your dashboard, and clicking on the "Create" button.
-
-
-#### Adding the base Application
-
-1. **Add Project to the Repository**:
-   ```bash
-   cd myProject
-   git add .
-   ```
-2. **Initial Commit**:
-   ```bash
-   git commit -m "First commit"
-   ```
-
-#### Version Tagging in BitBucket
-
-1. **Create a Tag for the Initial Version**: BitBucket uses a similar approach to GitHub in terms of applying tags
-   ```bash
-   git tag -a v1.1.0 -m "Tagging the 1.1.0 release of the project."
-   git push --tags
-   ```
-
-#### Implementing New Features and Bug Fixes
-
-1. **Branching for implementing new features**: Once again, similar to GitHub
-   ```bash
-   git checkout -b email-field
-    ```
-
-2. **Merging the Feature Branch**:
-   ```bash
-   git checkout main
-   git merge email-field
-    ```
+#### Implementing the New Feature - Email Field
+```bash
+hg branch email-field
+```
+To switch to the email-field branch, the following command can be used:
+```bash
+hg update email-field
+```
+To implement the new feature, the following commands can be used:
+```bash
+hg merge email-field
+```
 ### Final Notes
-- BitBucket and GitHub, both being Git-based platforms, share similar command structures for implementing project goals, making the transition between the two relatively seamless for developers.
-- The primary differences between BitBucket and GitHub lie in their user interfaces and pricing plans, aspects that do not directly influence the command-line operations used in project implementation.
-- Despite initial confusion with command usage, all issues related to the assignment were successfully resolved, demonstrating the adaptability and problem-solving capabilities inherent in using version control systems like BitBucket and GitHub.
+- Used these websites as references for the comparing of the two version control systems:
+  https://www.javatpoint.com/git-vs-mercurial    
+  https://www.perforce.com/blog/vcs/mercurial-vs-git-how-are-they-different
+- Despite initial confusion with command usage, all issues related to the assignment were successfully resolved, demonstrating the adaptability and problem-solving capabilities inherent in using version control systems like GitHub.

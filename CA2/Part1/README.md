@@ -16,7 +16,7 @@
     - [Part 1: Adding the runServer task](#Part-1-Adding-the-runServer-task)
     - [Part 2: Adding the test class and unit test](#Part-2-Adding-the-test-class-and-unit-test)
     - [Part 3: Adding the Copy task](#Part-3-Addding-the-Copy-task)
-3. [Issues](#Issues)
+
 
 
 ## Getting Started

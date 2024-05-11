@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
 
     # We need to download H2
     db.vm.provision "shell", inline: <<-SHELL
-      wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.2224/h2-2.2.224.jar
+      wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar
     SHELL
 
     # The following provision shell will run ALWAYS so that we can execute the H2 server process

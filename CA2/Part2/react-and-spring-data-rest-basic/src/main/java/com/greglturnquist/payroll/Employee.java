@@ -133,5 +133,13 @@ public class Employee {
 			", description='" + description + '\'' +
 			'}';
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
 // end::code[]

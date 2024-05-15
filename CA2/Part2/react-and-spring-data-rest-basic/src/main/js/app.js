@@ -14,11 +14,25 @@ class App extends React.Component { // <1>
 		this.state = {employees: []};
 	}
 
+	//CA2 code
+	componentDidMount() { // <2>
+		client({method: 'GET', path: '/api/employees'}).done(response => {
+			this.setState({employees: response.entity._embedded.employees});
+		});
+	}
+//CA3 code
+	/*
 	componentDidMount() { // <2>
 		client({method: 'GET', path: '/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT/api/employees'}).done(response => {
 			this.setState({employees: response.entity._embedded.employees});
 		});
 	}
+
+	 */
+
+
+
+
 
 	render() { // <3>
 		return (

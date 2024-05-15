@@ -1,4 +1,4 @@
-# Class Assignment 2 part 2
+./gradlew bootRun# Class Assignment 2 part 2
 
 ## Introduction
 

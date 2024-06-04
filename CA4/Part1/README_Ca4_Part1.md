@@ -51,7 +51,7 @@ You must also crate a free Docker account, this will facilitate the process of p
 After you are located in the CA4/Part1 directory, you must create a Dockerfile to build the Docker image.
 ```bash
 $ cd CA4/Part1
-$ touch Dockerfile
+$ touch Dockerfile_Web
 ```
 
 Now lets go through each line of the Dockerfile:
@@ -148,7 +148,7 @@ $ docker push your-docker-hub-username/ca4-part1:v1
 Once again we must create a Dockerfile, but this time in the CA4/Part2/V1 directory.
 ```bash
 $ cd CA4/Part2/V2
-$ touch Dockerfile
+$ touch Dockerfile_Web
 ```
 
 Now lets go through each line of the Dockerfile for the second version:

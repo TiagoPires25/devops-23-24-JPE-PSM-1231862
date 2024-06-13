@@ -1,60 +1,67 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
-        IMAGE_NAME = 'my-tomcat-app'
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                echo 'Setting Git buffer size...'
-                sh 'git config --global http.postBuffer 524288000'
-                retry(3) {
-                    echo 'Checking out the code...'
-                    git 'https://github.com/TiagoPires25/devops-23-24-JPE-PSM-1231862'
-                }
+                git 'https://github.com/TiagoPires25/devops-23-24-JPE-PSM-1231862-.git'
             }
         }
 
         stage('Assemble') {
             steps {
-                echo 'Assembling the project...'
-                dir('CA2/Part1/gradle_basic_demo') {
-                    sh 'chmod +x gradlew'
-                    sh './gradlew clean assemble -x test'
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    script {
+                        if (isUnix()) {
+                            sh './gradlew assemble'
+                        } else {
+                            bat './gradlew assemble'
+                        }
+                    }
                 }
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the project...'
-                dir('CA2/Part1/gradle_basic_demo') {
-                    sh './gradlew test'
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    script {
+                        if (isUnix()) {
+                            sh './gradlew test'
+                        } else {
+                            bat './gradlew test'
+                        }
+                    }
                 }
             }
             post {
                 always {
-                    junit 'CA2/Part1/gradle_basic_demo/build/test-results/test/*.xml'
+                    junit '**/build/test-results/**/*.xml'
                 }
             }
         }
 
         stage('Javadoc') {
             steps {
-                echo 'Generating Javadoc...'
-                dir('CA2/Part1/gradle_basic_demo') {
-                    sh './gradlew javadoc'
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    script {
+                        if (isUnix()) {
+                            sh './gradlew javadoc'
+                        } else {
+                            bat './gradlew javadoc'
+                        }
+                    }
                 }
             }
             post {
                 always {
                     publishHTML(target: [
-                        reportDir: 'CA2/Part1/gradle_basic_demo/build/docs/javadoc',
-                        reportFiles: 'index.html',
-                        reportName: 'Javadoc'
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll              : true,
+                            reportDir            : 'CA2/Part2/react-and-spring-data-rest-basic/build/docs/javadoc',
+                            reportFiles          : 'index.html',
+                            reportName           : 'Javadoc'
                     ])
                 }
             }
@@ -62,20 +69,24 @@ pipeline {
 
         stage('Archive') {
             steps {
-                echo 'Archiving the project...'
-                archiveArtifacts artifacts: 'CA2/Part1/gradle_basic_demo/build/libs/*.war', fingerprint: true
+                archiveArtifacts artifacts: '**/build/libs/*.war', fingerprint: true
             }
         }
 
         stage('Publish Image') {
             steps {
-                echo 'Publishing Docker Image...'
                 script {
-                    dir('CA2/Part1/gradle_basic_demo') {
-                        def app = docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}", '-f Dockerfile .')
-                        docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                            app.push("${env.BUILD_NUMBER}")
-                            app.push("latest")
+                    dir('CA5/Part2') {
+                        script {
+                            if (isUnix()) {
+                                sh 'cp ../../CA2/Part2/react-and-spring-data-rest-basic/build/libs/*.war .'
+                            } else {
+                                bat 'copy ..\\..\\CA2\\Part2\\react-and-spring-data-rest-basic\\build\\libs\\*.war .'
+                            }
+                        }
+                        def app = docker.build("tiagopires1862/devops_23_24:${env.BUILD_NUMBER}")
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
+                            app.push()
                         }
                     }
                 }

@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/TiagoPires25/devops-23-24-JPE-PSM-1231862-.git'
+                git 'https://github.com/TiagoPires25/devops-23-24-JPE-PSM-1231862.git'
             }
         }
 
@@ -84,7 +84,7 @@ pipeline {
                                 bat 'copy ..\\..\\CA2\\Part2\\react-and-spring-data-rest-basic\\build\\libs\\*.war .'
                             }
                         }
-                        def app = docker.build("tiagopires1862/devops_23_24:${env.BUILD_NUMBER}")
+                        def app = docker.build("tiagopires1862/CA5_Part2:${env.BUILD_NUMBER}")
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
                             app.push()
                         }
